@@ -62,6 +62,7 @@ function showGame(value) {
     } else {
         gameContainer.style.display = "none";
         form.style.display = "inline";
+        stopSound();
     }
 }
 

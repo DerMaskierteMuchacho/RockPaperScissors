@@ -28,6 +28,10 @@ function loadLocalRanking() {
 }
 
 function updateRanking(player) {
+    if (!playLocal) {
+        return;
+    }
+
     if (localRankings.find((rank) => rank.name === player.name)) {
         console.log("player found");
     } else {

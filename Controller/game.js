@@ -8,7 +8,6 @@ window.onload = function load() {
     gameManager = new handManager();
     showGame(false);
     loadLocalRanking();
-    playSound();
 };
 
 function startGame(value) {
@@ -20,6 +19,7 @@ function startGame(value) {
     );
 
     showGame(true);
+    playSound();
 }
 
 function playHand(hand) {
@@ -30,8 +30,8 @@ function playHand(hand) {
         playerObj.losses++;
     }
 
-    updateRanking(playerObj);
     displayPlayerScore();
+    updateRanking(playerObj);
 }
 
 function createNode(type, content) {

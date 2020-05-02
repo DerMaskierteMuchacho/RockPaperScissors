@@ -90,6 +90,7 @@ class handManager {
     }
 
     playHandServer(player, hand) {
+        let result;
         let url =
             "https://us-central1-schere-stein-papier-ee0c9.cloudfunctions.net/widgets/play?playerName=" +
             playerObj.name +
@@ -104,11 +105,13 @@ class handManager {
                 console.log(data.choice);
                 console.log(data.win);
 
-                printHistory(hand, data.choice, data.win);
+                result = data.win;
+                printHistory(hand, data.choice, result);
+
             })
             .catch((error) => console.log(error));
 
-        return data.win;
+        return result;
     }
 
     playHandLocal(player, hand) {
