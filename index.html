@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="de">
+
+<head>
+    <title>Schere Stein Papier</title>
+    <meta charset="UTF-8">
+    <link rel="stylesheet" href="style.css">
+    <link href="Resources/shin_chan_icon.ico" rel="icon" type="image/x-icon" />
+    <script src="https://kit.fontawesome.com/0fcb32c039.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="Model/player.js"></script>
+    <script type="text/javascript" src="Model/hand.js"></script>
+    <script type="text/javascript" src="Controller/game.js"></script>
+    <script type="text/javascript" src="Controller/handmanager.js"></script>
+    <script type="text/javascript" src="Controller/ranking.js"></script>
+    <script type="text/javascript" src="Controller/sound.js"></script>
+    <script type="text/javascript" src="View/view.js"></script>
+</head>
+
+<body>
+    <div id="content">
+
+        <div id="mode">
+            <div id="muchachoTitle">
+                <img src="Resources/muchacho_title.png">
+            </div>
+
+            <input type="button" id="switchToServer" onclick="switchMode()" value="Wechsle zu Server">
+            <div id="score">
+                <h3 id="scoreTitle">Lokale Rangliste</h3>
+                <ol id="scoreboard"> </ol>
+            </div>
+
+            <form id="form" action="javascript:void(0);" onsubmit="startGame(document.querySelector('#username').value)">
+                <p>Starten Sie ein neues Spiel</p>
+
+                <div id="modes">
+                    <input type="radio" id="radioBasic" name="mode" checked value=3>
+                    <label for="radioBasic">Normal</label>
+                    <br>
+                    <input type="radio" id="radioExtended" name="mode" value=5>
+                    <label for="radioExtended">Erweitert</label>
+                    <br>
+                </div>
+
+                <label for="username">Name:</label>
+                <input id="username" name="username" type="text" placeholder="username" size="50" required autofocus>
+
+                <button type="submit" id="startbutton">start game!</button>
+            </form>
+
+            <div id="muchacho">
+                <img src="Resources/muchacho2.png">
+            </div>
+        </div>
+
+        <div id="game">
+            <div id="return">
+                <input type="button" value="zurück" onclick="showGame(false)">
+            </div>
+            <div id="handButton"></div>
+            <div id="playerScore"></div>
+            <div id="history">
+                <h3>History</h3>
+            </div>
+        </div>
+    </div>
+
+    <audio id="sound">
+        <source src="Resources/Muchacho.mp3" type="audio/mpeg">
+    </audio>
+
+</body>
+
+</html>
