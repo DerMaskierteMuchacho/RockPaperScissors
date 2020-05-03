@@ -9,6 +9,16 @@ div {
     text-align: center;
 }
 
+.muchacho {
+    display: none;
+}
+
+#muchachoMode {
+    position: absolute;
+    top: 10px;
+    left: 10px;
+}
+
 #game {
     padding-top: 50px;
     display: none;

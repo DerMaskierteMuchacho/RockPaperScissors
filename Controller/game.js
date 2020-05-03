@@ -11,7 +11,7 @@ window.onload = function load() {
 };
 
 function startGame(value) {
-    playerObj = new player(document.getElementById("username").value, 0, 0);
+    playerObj = getOrCreatePlayer(document.getElementById("username").value);
     document.getElementById("history").innerHTML = "<h3>History</h3>";
 
     gameManager.initGame(
@@ -20,6 +20,17 @@ function startGame(value) {
 
     showGame(true);
     playSound();
+    displayPlayerScore();
+}
+
+function getOrCreatePlayer(username) {
+    let rankingPlayer = localRankings.find((rank) => rank.name === username);
+
+    if (rankingPlayer === undefined) {
+        return new player(username, 0, 0);
+    } else {
+        return rankingPlayer;
+    }
 }
 
 function playHand(hand) {

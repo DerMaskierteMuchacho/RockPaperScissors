@@ -20,8 +20,11 @@
     <div id="content">
 
         <div id="mode">
-            <div id="muchachoTitle">
-                <img src="Resources/muchacho_title.png">
+            <div id="muchachoMode">
+                <img src="Resources/shin_chan.png" onclick="muchachoMode()" alt="Muchacho Mode">
+            </div>
+            <div id="muchachoTitle" class="muchacho">
+                <img src="Resources/muchacho_title.png" alt="Muchacho Title">
             </div>
 
             <input type="button" id="switchToServer" onclick="switchMode()" value="Wechsle zu Server">
@@ -48,8 +51,8 @@
                 <button type="submit" id="startbutton">start game!</button>
             </form>
 
-            <div id="muchacho">
-                <img src="Resources/muchacho2.png">
+            <div id="muchachoImg" class="muchacho">
+                <img src="Resources/muchacho2.png" alt="Der maskierte Muchacho">
             </div>
         </div>
 
@@ -65,7 +68,7 @@
         </div>
     </div>
 
-    <audio id="sound">
+    <audio id="sound" class="muchacho">
         <source src="Resources/Muchacho.mp3" type="audio/mpeg">
     </audio>
 

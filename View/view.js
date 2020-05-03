@@ -41,15 +41,22 @@ function switchMode() {
         document.getElementById("switchToServer").value = "Wechsle zu Lokal";
         document.getElementById("radioBasic").disabled = true;
         document.getElementById("radioExtended").checked = true;
-        loadServerRanking();
     } else {
         document.getElementById("scoreTitle").innerText = "Lokale Rangliste";
         document.getElementById("switchToServer").value = "Wechsle zu Server";
         document.getElementById("radioBasic").disabled = false;
-        loadLocalRanking();
     }
 
     playLocal = !playLocal;
+    loadRanking();
+}
+
+function loadRanking() {
+    if (playLocal) {
+        loadLocalRanking();
+    } else {
+        loadServerRanking();
+    }
 }
 
 function showGame(value) {
@@ -63,6 +70,7 @@ function showGame(value) {
         gameContainer.style.display = "none";
         form.style.display = "inline";
         stopSound();
+        loadRanking();
     }
 }
 
@@ -72,4 +80,17 @@ function displayPlayerScore() {
     playerScore.appendChild(
         createNode("h3", "Win: " + playerObj.wins + " | Lose: " + playerObj.losses)
     );
+}
+
+let muchachoModeEnabled = false;
+
+function muchachoMode() {
+    muchachoModeEnabled = true;
+    document.getElementById("username").value = "Der maskierte Muchacho";
+    for (let el of document.querySelectorAll(".muchacho")) {
+        console.log(
+            "Hier kommt er, der maskierte Muchacho. Mächtig, mutig und Muchomacho."
+        );
+        el.style.display = "block";
+    }
 }

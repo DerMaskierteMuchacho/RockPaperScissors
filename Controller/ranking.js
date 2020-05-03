@@ -32,9 +32,18 @@ function updateRanking(player) {
         return;
     }
 
-    if (localRankings.find((rank) => rank.name === player.name)) {
-        console.log("player found");
+    let rankingPlayer = findPlayer(player.name);
+    //console.log("player wins " + player.wins);
+    if (rankingPlayer != undefined) {
+        //console.log("player found");
+        rankingPlayer.wins = player.wins;
+        rankingPlayer.losses = player.losses;
     } else {
-        console.log("new player");
+        //console.log("new player");
+        localRankings.push(player);
     }
+}
+
+function findPlayer(username) {
+    return localRankings.find((rank) => rank.name === username);
 }
