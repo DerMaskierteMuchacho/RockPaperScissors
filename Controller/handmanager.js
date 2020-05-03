@@ -74,6 +74,11 @@ class handManager {
     }
 
     playHand(playLocal, value) {
+        enableHandButtons(false);
+        setTimeout(function() {
+            enableHandButtons(true);
+        }, 1000);
+
         console.log("Play local: " + playLocal);
         console.log("Player used: " + value);
         let player = this.findHand(HandTypes[value]);
@@ -107,7 +112,6 @@ class handManager {
 
                 result = data.win;
                 printHistory(hand, data.choice, result);
-
             })
             .catch((error) => console.log(error));
 

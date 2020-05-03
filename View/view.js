@@ -82,6 +82,13 @@ function displayPlayerScore() {
     );
 }
 
+function enableHandButtons(value) {
+    console.log("enable hands: " + value);
+    for (let el of document.querySelectorAll(".circleButton")) {
+        el.disabled = !value;
+    }
+}
+
 let muchachoModeEnabled = false;
 
 function muchachoMode() {
