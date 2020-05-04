@@ -20,7 +20,7 @@ function startGame(value) {
 
     showGame(true);
     playSound();
-    displayPlayerScore();
+    displayPlayerScore(playerObj);
 }
 
 function getOrCreatePlayer(username) {
@@ -35,13 +35,14 @@ function getOrCreatePlayer(username) {
 
 function playHand(hand) {
     let result = gameManager.playHand(playLocal, hand);
-    if (result === "Win") {
+    console.log("play hand result: " + result);
+    if (result === HandComparison.Win) {
         playerObj.wins++;
-    } else if (result === "Loss") {
+    } else if (result === HandComparison.Loss) {
         playerObj.losses++;
     }
 
-    displayPlayerScore();
+    displayPlayerScore(playerObj);
     updateRanking(playerObj);
 }
 

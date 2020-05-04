@@ -74,11 +74,12 @@ function showGame(value) {
     }
 }
 
-function displayPlayerScore() {
+function displayPlayerScore(player) {
+    console.log("score " + player.wins);
     let playerScore = document.querySelector("#playerScore");
     playerScore.childNodes.forEach((node) => node.remove());
     playerScore.appendChild(
-        createNode("h3", "Win: " + playerObj.wins + " | Lose: " + playerObj.losses)
+        createNode("h3", "Win: " + player.wins + " | Lose: " + player.losses)
     );
 }
 

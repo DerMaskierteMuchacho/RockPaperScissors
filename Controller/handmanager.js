@@ -110,8 +110,11 @@ class handManager {
                 console.log(data.choice);
                 console.log(data.win);
 
-                result = data.win;
-                printHistory(hand, data.choice, result);
+                //TODO display win lose in game view
+
+                result = this.getServerResult(data.win);
+                console.log("outcome: " + this.getHandOutcome(result));
+                printHistory(hand, data.choice, this.getHandOutcome(result));
             })
             .catch((error) => console.log(error));
 
@@ -123,10 +126,10 @@ class handManager {
         let cpuHand = this.getHandType(cpu.hand);
         console.log("CPU used: " + cpuHand);
 
-        let result = this.getHandOutcome(player.compareTo(cpu));
-        console.log("outcome: " + result);
+        let result = player.compareTo(cpu);
+        console.log("outcome: " + this.getHandOutcome(result));
 
-        printHistory(hand, cpuHand, result);
+        printHistory(hand, cpuHand, this.getHandOutcome(result));
 
         return result;
     }
@@ -180,6 +183,23 @@ class handManager {
                 return "Streichholz";
             default:
                 return "invalid";
+        }
+    }
+
+    getServerResult(value) {
+        //TODO use enum
+
+        console.log("server result value: " + value);
+
+        switch (value) {
+            case true:
+                return HandComparison.Win;
+            case false:
+                return HandComparison.Loss;
+            case undefined:
+                return HandComparison.Draw;
+            default:
+                return "error";
         }
     }
 }
