@@ -187,15 +187,13 @@ class handManager {
     }
 
     getServerResult(value) {
-        //TODO use enum
-
         console.log("server result value: " + value);
 
         switch (value) {
             case true:
                 return HandComparison.Win;
             case false:
-                return HandComparison.Loss;
+                return HandComparison.Lose;
             case undefined:
                 return HandComparison.Draw;
             default:

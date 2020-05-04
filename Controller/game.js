@@ -37,9 +37,9 @@ function playHand(hand) {
     let result = gameManager.playHand(playLocal, hand);
     console.log("play hand result: " + result);
     if (result === HandComparison.Win) {
-        playerObj.wins++;
-    } else if (result === HandComparison.Loss) {
-        playerObj.losses++;
+        playerObj.winCount++;
+    } else if (result === HandComparison.Lose) {
+        playerObj.loseCount++;
     }
 
     displayPlayerScore(playerObj);

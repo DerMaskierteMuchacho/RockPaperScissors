@@ -36,8 +36,8 @@ function updateRanking(player) {
     //console.log("player wins " + player.wins);
     if (rankingPlayer != undefined) {
         //console.log("player found");
-        rankingPlayer.wins = player.wins;
-        rankingPlayer.losses = player.losses;
+        rankingPlayer.winCount = player.winCount;
+        rankingPlayer.loseCount = player.loseCount;
     } else {
         //console.log("new player");
         localRankings.push(player);

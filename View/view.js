@@ -2,7 +2,7 @@
 
 function displayRanking(array) {
     let sorted = array.sort(function(a, b) {
-        return b.wins - a.wins;
+        return b.winCount - a.winCount;
     });
     console.log(sorted);
 
@@ -18,7 +18,7 @@ function displayRanking(array) {
         }
 
         let node = document.createElement("li");
-        node.textContent = "Rang mit " + entry.wins + " Siegen: " + entry.name;
+        node.textContent = "Rang mit " + entry.winCount + " Siegen: " + entry.name;
         scoreboard.appendChild(node);
         displayCount++;
     });
@@ -75,11 +75,11 @@ function showGame(value) {
 }
 
 function displayPlayerScore(player) {
-    console.log("score " + player.wins);
+    console.log("score " + player.winCount);
     let playerScore = document.querySelector("#playerScore");
     playerScore.childNodes.forEach((node) => node.remove());
     playerScore.appendChild(
-        createNode("h3", "Win: " + player.wins + " | Lose: " + player.losses)
+        createNode("h3", "Win: " + player.winCount + " | Lose: " + player.loseCount)
     );
 }
 

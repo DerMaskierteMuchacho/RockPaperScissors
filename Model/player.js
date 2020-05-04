@@ -2,12 +2,12 @@
 
 class player {
     name;
-    wins;
-    losses;
+    winCount;
+    loseCount;
 
     constructor(name, wins, losses) {
         this.name = name;
-        this.wins = wins;
-        this.losses = losses;
+        this.winCount = wins;
+        this.loseCount = losses;
     }
 }

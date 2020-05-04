@@ -1,17 +1,17 @@
 "use strict";
 
 const HandTypes = { Rock: 1, Paper: 2, Scissors: 3, Lizard: 4, Spock: 5 };
-const HandComparison = { Win: 1, Loss: 2, Draw: 3 };
+const HandComparison = { Win: 1, Lose: 2, Draw: 3 };
 
 class Hand {
     win = [];
-    loss = [];
+    lose = [];
     hand;
 
     constructor(handType, wins, losses) {
         this.hand = handType;
         this.win = wins;
-        this.loss = losses;
+        this.lose = losses;
     }
 
     addWin(obj) {
@@ -19,7 +19,7 @@ class Hand {
     }
 
     addLoss(obj) {
-        loss.push(obj);
+        lose.push(obj);
     }
 
     compareTo(otherHand) {
@@ -32,8 +32,8 @@ class Hand {
 
         if (this.win.includes(otherHand.hand)) {
             return HandComparison.Win;
-        } else if (this.loss.includes(otherHand.hand)) {
-            return HandComparison.Loss;
+        } else if (this.lose.includes(otherHand.hand)) {
+            return HandComparison.Lose;
         } else {
             return "error comparing hands";
         }
