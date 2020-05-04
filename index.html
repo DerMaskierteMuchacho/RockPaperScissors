@@ -10,7 +10,8 @@
     <script type="text/javascript" src="Model/player.js"></script>
     <script type="text/javascript" src="Model/hand.js"></script>
     <script type="text/javascript" src="Controller/game.js"></script>
-    <script type="text/javascript" src="Controller/handmanager.js"></script>
+    <script type="text/javascript" src="Controller/handController.js"></script>
+    <script type="text/javascript" src="Controller/gameController.js"></script>
     <script type="text/javascript" src="Controller/ranking.js"></script>
     <script type="text/javascript" src="Controller/sound.js"></script>
     <script type="text/javascript" src="View/view.js"></script>
@@ -58,7 +59,7 @@
 
         <div id="game">
             <div id="return">
-                <input type="button" value="zurück" onclick="showGame(false)">
+                <input type="button" value="zurück" onclick="stopGame()">
             </div>
             <div id="handButton"></div>
             <div id="playerScore"></div>
