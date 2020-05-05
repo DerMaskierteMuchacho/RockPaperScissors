@@ -8,6 +8,10 @@ div {
     text-align: center;
 }
 
+#scoreboard {
+    list-style-position: inside;
+}
+
 .muchacho {
     display: none;
 }
