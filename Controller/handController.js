@@ -76,6 +76,16 @@ class handController {
         console.log("loaded extended set");
     }
 
+    findHand(handValue) {
+        let i;
+        for (i = 0; i < this.hands.length; i++) {
+            let element = this.hands[i];
+            if (element.hand === handValue) {
+                return element;
+            }
+        }
+    }
+
     getRandomHand() {
         let index = Math.round(Math.random() * (this.hands.length - 1));
         return this.hands[index];

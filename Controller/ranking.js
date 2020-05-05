@@ -34,19 +34,19 @@ class ranking {
         return this.localRankings;
     }
 
-    updateRanking(player) {
+    updateRanking(player, playLocal) {
         if (!playLocal) {
             return;
         }
 
-        let rankingPlayer = findPlayer(player.name);
+        let rankingPlayer = this.findPlayer(player.name);
         if (rankingPlayer != undefined) {
             //console.log("player found");
             rankingPlayer.winCount = player.winCount;
             rankingPlayer.loseCount = player.loseCount;
         } else {
             //console.log("new player");
-            localRankings.push(player);
+            this.localRankings.push(player);
         }
     }
 

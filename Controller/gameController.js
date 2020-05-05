@@ -29,12 +29,12 @@ class gameController {
         this.view.deleteHistory();
         this.view.showGame(true);
         this.view.displayPlayerScore(this.playerObj);
-        this.sound.playSound();
+        this.sound.playSound(this.muchachoModeEnabled);
     }
 
     stopGame() {
         this.view.showGame(false);
-        this.sound.stopSound();
+        this.sound.stopSound(this.muchachoModeEnabled);
         this.loadRanking(this.playLocal);
     }
 
@@ -60,13 +60,16 @@ class gameController {
     }
 
     playHand(value) {
-        this.view.enableHandButtons(false);
+        let viewObj = this.view;
+
+        viewObj.enableHandButtons(false);
         setTimeout(function() {
-            this.view.enableHandButtons(true);
+            viewObj.enableHandButtons(true);
         }, 1000);
 
         console.log("Play local: " + this.playLocal);
         console.log("Player used: " + value);
+
         let player = this.hands.findHand(HandTypes[value]);
 
         let result;
@@ -79,24 +82,22 @@ class gameController {
 
         console.log("play hand result: " + result);
         if (result === HandComparison.Win) {
-            playerObj.winCount++;
+            this.playerObj.winCount++;
         } else if (result === HandComparison.Lose) {
-            playerObj.loseCount++;
+            this.playerObj.loseCount++;
         }
 
-        displayPlayerScore(playerObj);
-        updateRanking(playerObj);
-
-        return result;
+        this.view.displayPlayerScore(this.playerObj);
+        this.rank.updateRanking(this.playerObj, this.playLocal);
     }
 
     playHandServer(player, hand) {
         let result;
         let url =
             "https://us-central1-schere-stein-papier-ee0c9.cloudfunctions.net/widgets/play?playerName=" +
-            playerObj.name +
+            this.playerObj.name +
             "&playerHand=" +
-            this.getServerHand(hand);
+            this.hands.getServerHand(hand);
         fetch(url)
             .then((response) => {
                 return response.json();
@@ -118,14 +119,14 @@ class gameController {
     }
 
     playHandLocal(player, hand) {
-        let cpu = this.getRandomHand();
-        let cpuHand = this.getHandType(cpu.hand);
+        let cpu = this.hands.getRandomHand();
+        let cpuHand = this.hands.getHandType(cpu.hand);
         console.log("CPU used: " + cpuHand);
 
         let result = player.compareTo(cpu);
-        console.log("outcome: " + this.getHandOutcome(result));
+        console.log("outcome: " + this.hands.getHandOutcome(result));
 
-        printHistory(hand, cpuHand, this.getHandOutcome(result));
+        this.view.printHistory(hand, cpuHand, this.hands.getHandOutcome(result));
 
         return result;
     }
