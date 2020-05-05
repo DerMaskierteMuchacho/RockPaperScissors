@@ -130,7 +130,7 @@ class handController {
             case undefined:
                 return HandComparison.Draw;
             default:
-                return "error";
+                console.log("error getting server result");
         }
     }
 }

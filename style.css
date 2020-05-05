@@ -1,6 +1,5 @@
 body {
     font-family: Arial, Helvetica, sans-serif;
-    /*background-image: radial-gradient(circle at 3% 84%, #ead85a, #d74205);*/
     background: rgb(255, 0, 0);
     background: linear-gradient( 90deg, rgba(255, 0, 0, 0.92) 0%, rgba(255, 112, 0, 1) 35%, rgba(255, 236, 0, 1) 100%);
 }
@@ -46,10 +45,29 @@ div {
 #handButton button:hover {
     border-color: black;
     border-width: 2px;
-    animation-name: colors;
+    animation-name: muchacho;
     animation-duration: 5s;
     animation-iteration-count: infinite;
-    animation-timing-function: linear;
+    /*animation-timing-function: linear;*/
+}
+
+@keyframes muchacho {
+    0% {
+        border-color: #1563a5;
+        color: #1563a5;
+    }
+    33% {
+        border-color: #14a656;
+        color: #14a656;
+    }
+    66% {
+        border-color: #ffd075;
+        color: #ffd075;
+    }
+    100% {
+        border-color: #8b2d48;
+        color: #8b2d48;
+    }
 }
 
 @keyframes colors {

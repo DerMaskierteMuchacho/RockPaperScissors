@@ -2,6 +2,7 @@
 
 class ranking {
     localRankings = [];
+    serverRanking = [];
 
     async loadRanking(playLocal) {
         if (playLocal) {
@@ -12,6 +13,8 @@ class ranking {
     }
 
     async loadServerRanking() {
+        this.serverRanking = [];
+
         let url =
             "https://us-central1-schere-stein-papier-ee0c9.cloudfunctions.net/widgets/ranking";
 
@@ -19,15 +22,11 @@ class ranking {
             await fetch(url).catch((error) => console.log(error))
         ).json();
 
-        let players = [];
-
         for (const [key, value] of Object.entries(data)) {
-            players.push(new player(value.user, value.win, value.lost));
+            this.serverRanking.push(new player(value.user, value.win, value.lost));
         }
 
-        console.log("players server: " + players.length);
-
-        return players;
+        return this.serverRanking;
     }
 
     loadLocalRanking() {

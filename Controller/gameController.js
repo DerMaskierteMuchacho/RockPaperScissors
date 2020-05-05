@@ -24,7 +24,8 @@ class gameController {
         this.hands.initGame(value);
 
         this.playerObj = this.getOrCreatePlayer(
-            document.getElementById("username").value
+            document.getElementById("username").value,
+            this.playLocal
         );
         this.view.deleteHistory();
         this.view.showGame(true);
@@ -49,7 +50,11 @@ class gameController {
         this.view.displayRanking(await this.rank.loadRanking(local));
     }
 
-    getOrCreatePlayer(username) {
+    getOrCreatePlayer(username, local) {
+        if (!local) {
+            return new player(username, 0, 0);
+        }
+
         let rankingPlayer = this.rank.findPlayer(username);
 
         if (rankingPlayer === undefined) {
@@ -59,7 +64,7 @@ class gameController {
         }
     }
 
-    playHand(value) {
+    async playHand(value) {
         let viewObj = this.view;
 
         viewObj.enableHandButtons(false);
@@ -73,29 +78,41 @@ class gameController {
         let player = this.hands.findHand(HandTypes[value]);
 
         let result;
-
         if (this.playLocal) {
             result = this.playHandLocal(player, value);
         } else {
-            result = this.playHandServer(player, value);
+            result = await this.playServer(player, value);
         }
 
-        console.log("play hand result: " + result);
-        if (result === HandComparison.Win) {
-            this.playerObj.winCount++;
-        } else if (result === HandComparison.Lose) {
-            this.playerObj.loseCount++;
-        }
-
+        this.updatePlayerScore(this.playerObj, result);
         this.view.displayPlayerScore(this.playerObj);
         this.rank.updateRanking(this.playerObj, this.playLocal);
     }
 
-    playHandServer(player, hand) {
+    async playServer(player, hand) {
+        let result = [];
+        let url =
+            "https://us-central1-schere-stein-papier-ee0c9.cloudfunctions.net/widgets/play?playerName=" +
+            player.name +
+            "&playerHand=" +
+            this.hands.getServerHand(hand);
+        let data = await (
+            await fetch(url).catch((error) => console.log(error))
+        ).json();
+
+        result = this.hands.getServerResult(data.win);
+        let outcome = this.hands.getHandOutcome(result);
+        console.log("outcome: " + outcome);
+        this.view.printHistory(hand, data.choice, outcome);
+
+        return result;
+    }
+
+    async playHandServer(player, hand) {
         let result;
         let url =
             "https://us-central1-schere-stein-papier-ee0c9.cloudfunctions.net/widgets/play?playerName=" +
-            this.playerObj.name +
+            player.name +
             "&playerHand=" +
             this.hands.getServerHand(hand);
         fetch(url)
@@ -103,11 +120,9 @@ class gameController {
                 return response.json();
             })
             .then((data) => {
-                console.log(data);
-                console.log(data.choice);
-                console.log(data.win);
-
-                //TODO display win lose in game view
+                console.log("data: " + data);
+                console.log("data.choice: " + data.choice);
+                console.log("data.win: " + data.win);
 
                 result = this.hands.getServerResult(data.win);
                 let outcome = this.hands.getHandOutcome(result);
@@ -126,10 +141,20 @@ class gameController {
 
         let result = player.compareTo(cpu);
         console.log("outcome: " + this.hands.getHandOutcome(result));
-
         this.view.printHistory(hand, cpuHand, this.hands.getHandOutcome(result));
 
         return result;
+    }
+
+    updatePlayerScore(player, result) {
+        console.log("play hand result: " + result);
+        if (result === HandComparison.Win) {
+            player.winCount++;
+        } else if (result === HandComparison.Lose) {
+            player.loseCount++;
+        } else {
+            console.log("error comparing results => result: " + result);
+        }
     }
 
     enableMuchachoMode() {

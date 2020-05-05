@@ -28,21 +28,21 @@
                 <img src="Resources/muchacho_title.png" alt="Muchacho Title">
             </div>
 
-            <input type="button" id="switchToServer" onclick="switchMode()" value="Wechsle zu Server">
+            <input type="button" id="switchToServer" onclick="switchMode()" value="switch to Server">
             <div id="score">
-                <h3 id="scoreTitle">Lokale Rangliste</h3>
+                <h3 id="scoreTitle">Local Ranking</h3>
                 <ol id="scoreboard"> </ol>
             </div>
 
             <form id="form" action="javascript:void(0);" onsubmit="startGame(document.querySelector('#username').value)">
-                <p>Starten Sie ein neues Spiel</p>
+                <p>start a new game</p>
 
                 <div id="modes">
                     <input type="radio" id="radioBasic" name="mode" checked value=3>
                     <label for="radioBasic">Normal</label>
                     <br>
                     <input type="radio" id="radioExtended" name="mode" value=5>
-                    <label for="radioExtended">Erweitert</label>
+                    <label for="radioExtended">Extended</label>
                     <br>
                 </div>
 

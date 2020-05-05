@@ -5,7 +5,6 @@ class viewManager {
         let sorted = array.sort(function(a, b) {
             return b.winCount - a.winCount;
         });
-        console.log("sorted ranking: " + sorted);
 
         let scoreboard = document.querySelector("#scoreboard");
         scoreboard.innerHTML = "";
@@ -19,8 +18,7 @@ class viewManager {
             }
 
             let node = document.createElement("li");
-            node.textContent =
-                "Rang mit " + entry.winCount + " Siegen: " + entry.name;
+            node.textContent = "Rank " + entry.name + ": " + entry.winCount + " wins";
             scoreboard.appendChild(node);
             displayCount++;
         });
@@ -48,13 +46,13 @@ class viewManager {
 
     switchMode(playLocal) {
         if (playLocal) {
-            document.getElementById("scoreTitle").innerText = "Server Rangliste";
-            document.getElementById("switchToServer").value = "Wechsle zu Lokal";
+            document.getElementById("scoreTitle").innerText = "Server Rangking";
+            document.getElementById("switchToServer").value = "Switch to Local";
             document.getElementById("radioBasic").disabled = true;
             document.getElementById("radioExtended").checked = true;
         } else {
-            document.getElementById("scoreTitle").innerText = "Lokale Rangliste";
-            document.getElementById("switchToServer").value = "Wechsle zu Server";
+            document.getElementById("scoreTitle").innerText = "Lokale Ranking";
+            document.getElementById("switchToServer").value = "Switch to Server";
             document.getElementById("radioBasic").disabled = false;
         }
     }
