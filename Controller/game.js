@@ -2,6 +2,8 @@
 
 let gameManager;
 
+//TODO w3c validation
+
 window.onload = function load() {
     gameManager = new gameController();
 };

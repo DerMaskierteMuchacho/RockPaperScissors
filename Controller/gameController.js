@@ -44,9 +44,9 @@ class gameController {
         this.loadRanking(this.playLocal);
     }
 
-    loadRanking(local) {
+    async loadRanking(local) {
         console.log("loading ranking local: " + local);
-        this.view.displayRanking(this.rank.loadRanking(local));
+        this.view.displayRanking(await this.rank.loadRanking(local));
     }
 
     getOrCreatePlayer(username) {

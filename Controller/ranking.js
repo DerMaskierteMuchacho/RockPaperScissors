@@ -3,51 +3,31 @@
 class ranking {
     localRankings = [];
 
-    loadRanking(playLocal) {
+    async loadRanking(playLocal) {
         if (playLocal) {
             return this.loadLocalRanking();
         } else {
-            //let asdf = await loadScore_fetch();
-            let asdf = this.loadServerRanking();
-            console.log(asdf);
+            return await this.loadServerRanking();
         }
     }
 
-    loadServerRanking() {
-        const request = async() => {
-            const response = await fetch(
-                "https://us-central1-schere-stein-papier-ee0c9.cloudfunctions.net/widgets/ranking"
-            );
-            const json = await response.json();
-            return json;
-        };
+    async loadServerRanking() {
+        let url =
+            "https://us-central1-schere-stein-papier-ee0c9.cloudfunctions.net/widgets/ranking";
 
-        console.log("await " + request());
+        let data = await (
+            await fetch(url).catch((error) => console.log(error))
+        ).json();
 
-        /*
+        let players = [];
 
-https://dev.to/johnpaulada/synchronous-fetch-with-asyncawait
+        for (const [key, value] of Object.entries(data)) {
+            players.push(new player(value.user, value.win, value.lost));
+        }
 
-                                fetch(
-                                        "https://us-central1-schere-stein-papier-ee0c9.cloudfunctions.net/widgets/ranking"
-                                    )
-                                    .then((response) => {
-                                        return response.json();
-                                    })
-                                    .then((data) => {
-                                        console.log(data);
+        console.log("players server: " + players.length);
 
-                                        let players = [];
-
-                                        for (const [key, value] of Object.entries(data)) {
-                                            players.push(new player(value.user, value.win, value.lost));
-                                        }
-
-                                        console.log("players server: " + players.length);
-
-                                        return players;
-                                    })
-                                    .catch((error) => console.log(error));*/
+        return players;
     }
 
     loadLocalRanking() {

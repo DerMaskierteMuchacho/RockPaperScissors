@@ -2,30 +2,28 @@
 
 class viewManager {
     displayRanking(array) {
-        console.log("display");
+        let sorted = array.sort(function(a, b) {
+            return b.winCount - a.winCount;
+        });
+        console.log("sorted ranking: " + sorted);
 
-        /*let sorted = array.sort(function(a, b) {
-                    return b.winCount - a.winCount;
-                });
-                console.log("sorted ranking: " + sorted);
+        let scoreboard = document.querySelector("#scoreboard");
+        scoreboard.innerHTML = "";
 
-                let scoreboard = document.querySelector("#scoreboard");
-                scoreboard.innerHTML = "";
+        let maxDisplayCount = 10;
+        let displayCount = 0;
 
-                let maxDisplayCount = 10;
-                let displayCount = 0;
+        sorted.forEach((entry) => {
+            if (displayCount >= maxDisplayCount) {
+                return;
+            }
 
-                sorted.forEach((entry) => {
-                    if (displayCount >= maxDisplayCount) {
-                        return;
-                    }
-
-                    let node = document.createElement("li");
-                    node.textContent =
-                        "Rang mit " + entry.winCount + " Siegen: " + entry.name;
-                    scoreboard.appendChild(node);
-                    displayCount++;
-                });*/
+            let node = document.createElement("li");
+            node.textContent =
+                "Rang mit " + entry.winCount + " Siegen: " + entry.name;
+            scoreboard.appendChild(node);
+            displayCount++;
+        });
     }
 
     printHistory(playerHand, cpuHand, result) {
