@@ -109,9 +109,10 @@ class gameController {
 
                 //TODO display win lose in game view
 
-                result = this.getServerResult(data.win);
-                console.log("outcome: " + this.getHandOutcome(result));
-                printHistory(hand, data.choice, this.getHandOutcome(result));
+                result = this.hands.getServerResult(data.win);
+                let outcome = this.hands.getHandOutcome(result);
+                console.log("outcome: " + outcome);
+                this.view.printHistory(hand, data.choice, outcome);
             })
             .catch((error) => console.log(error));
 
