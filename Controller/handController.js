@@ -102,7 +102,6 @@ class handController {
     }
 
     getServerHand(value) {
-        //TODO use enum
         switch (value) {
             case "Rock":
                 return "Stein";
@@ -114,6 +113,23 @@ class handController {
                 return "Brunnen";
             case "Lizard":
                 return "Streichholz";
+            default:
+                return "invalid";
+        }
+    }
+
+    getServerHandTranslation(value) {
+        switch (value) {
+            case "Stein":
+                return "Rock";
+            case "Papier":
+                return "Paper";
+            case "Schere":
+                return "Scissors";
+            case "Brunnen":
+                return "Spock";
+            case "Streichholz":
+                return "Lizard";
             default:
                 return "invalid";
         }

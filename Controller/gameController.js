@@ -103,7 +103,11 @@ class gameController {
         result = this.hands.getServerResult(data.win);
         let outcome = this.hands.getHandOutcome(result);
         console.log("outcome: " + outcome);
-        this.view.printHistory(hand, data.choice, outcome);
+        this.view.printHistory(
+            hand,
+            this.hands.getServerHandTranslation(data.choice),
+            outcome
+        );
 
         return result;
     }
